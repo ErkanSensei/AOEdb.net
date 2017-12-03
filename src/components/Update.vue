@@ -25,7 +25,6 @@ export default {
     }
     #row {
         line-height: 1;
-        height: 64px;
         font-size: 12px;
         font-weight: bold;
         text-align: left;

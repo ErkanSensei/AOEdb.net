@@ -1,45 +1,93 @@
 <template>
-    <b-row>
-      <b-col sm='5' id='updates'>
-        <b-card title='Latest Updates' id='updatesCard'>
-          <Update 
-            date='09/23/17' 
-            title='Athens Update'
-            content='Updated database for latest celeste changes, including our new celeste exclusive items. In addition, the items and consumables pages are now sorted alphabetically. Finally, last but not least, the dreaded apostrophe issue is now resolved - no more andapos!'
-            image='../../src/assets/images/Arrow_E61_ua.png'
-          />
-          <router-view></router-view>
-        </b-card>
-      </b-col>
-    </b-row>
+  <div id='tableContainer'>
+    <table 
+      :items='items'
+      id='table'
+    >
+      <tbody>
+        <tr>
+          <th>Icon</th>
+          <th>Name</th>
+          <th>Levels</th>
+          <th>Rarity</th>
+          <th>Type</th>
+        </tr>
+        <tr v-for="item in items">
+          <td><img src="../assets/images/Arrow_E61_ua.png" alt="Arrows of Actaeon" width="45px"></td>
+          <td>{{ item.display_name }}</td>
+          <td>{{ returnLevels(item.available_levels).join(' ') }}</td>
+          <td><span :style='{ color: rareColor(item.rarity), fontWeight: "bold" }'>{{ toUpper(item.rarity) }}</span></td>
+          <td>{{ item.type }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
-import Update from './Update';
 
 export default {
-  name: 'Items',
-  components: {
-    Update,
-  },
-  data() {
+  data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-    };
+      items: []
+    }
   },
-};
+  created() {
+    this.fetchData(this.$route.params.name);
+  },
+  methods: {
+    fetchData(name) {
+      console.log('running')
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      fetch('http://aoedb.net/api/items?type=' + name)
+        .then(response => response.text())
+        .then(contents => {
+          this.items = JSON.parse(contents).items
+          console.log(this.items);  
+        })
+    },
+    toUpper(item) {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    },
+    returnLevels(levels) {
+      const newLevels = levels.map(level => {
+        return level - 3;
+      })
+      return newLevels;
+    },
+    rareColor(rarity) {
+      switch (rarity) {
+        case 'legendary': {
+          return 'orange'
+        }
+        case 'epic': {
+          return '#b04bdf'
+        }
+        case 'rare': {
+          return '#3b8fff'
+        }
+        case 'uncommon': {
+          return '#45ff5e'
+        }
+      }
+      
+    }
+  }
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #updates {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  #tableContainer {
+    width: 60%;
+    height: 90%;
+    margin: auto;
+    margin-top: 2%;
+    overflow: scroll;
   }
-  #updatesCard {
-    color: white;
-    background-color: #313d52;
+
+  #tableContainer > table > tbody > tr:hover {
+    background-color: #8299b8;
+    cursor: pointer;
   }
 </style>
+

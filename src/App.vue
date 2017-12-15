@@ -6,13 +6,13 @@
       </router-link>
       <div id='links'>
         <router-link to='/' class='link'>Home</router-link>
-        |
+        <span class='separator'>|</span>
         <router-link to='/items' class='link'>Items</router-link>
-        |
+        <span class='separator'>|</span>
         <router-link to='/' class='link'>Link</router-link>
-        |
+        <span class='separator'>|</span>
         <router-link to='/' class='link'>Link</router-link>
-        |
+        <span class='separator'>|</span>
         <router-link to='/' class='link'>Link</router-link>
       </div>
     </div>
@@ -45,6 +45,34 @@ body, html {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%
+}
+
+td, th {
+    white-space:nowrap;
+    color: #E6C953;
+    font-size: 14px;
+    text-shadow: 1px 0px 1px black;
+    text-align: left;
+    padding: 4px 4px 4px 8px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+
+th {
+  background-color: #313D52;
+  padding: 12px 4px 12px 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #3E506F;
+}
+
+tr:nth-child(odd) {
+  background-color: #313D52;
+}
+
 #navbar {
   border-bottom: 1px solid white;
   color: #E6C953;
@@ -71,5 +99,9 @@ body, html {
 #links {
   text-align: left;
   display: block;
+}
+.separator {
+  font-size: 25px;
+  color: rgba(230, 201, 83, 0.3);
 }
 </style>

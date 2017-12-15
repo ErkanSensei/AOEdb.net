@@ -1,17 +1,5 @@
 <template>
-    <b-row>
-      <b-col sm='5' id='updates'>
-        <b-card title='Latest Updates' id='updatesCard'>
-          <Update 
-            date='09/23/17' 
-            title='Athens Update'
-            content='Updated database for latest celeste changes, including our new celeste exclusive items. In addition, the items and consumables pages are now sorted alphabetically. Finally, last but not least, the dreaded apostrophe issue is now resolved - no more andapos!'
-            image='../../src/assets/images/Arrow_E61_ua.png'
-          />
-          <router-view></router-view>
-        </b-card>
-      </b-col>
-    </b-row>
+    <router-view />
 </template>
 
 <script>

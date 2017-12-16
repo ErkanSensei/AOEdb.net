@@ -101,17 +101,16 @@ export default {
     overflow-y: scroll;
     display: block;
   }
-  #tableContainer > table > tbody > tr:hover {
+  
+  #tableContainer > #table > table > tbody > tr:hover {
     background-color: #8299b8;
     cursor: pointer;
   }
 
-  #tableContainer > table > tbody > tr {
-    width: 100%;
-  }
-
-  #tableContainer > table > tbody > tr > td {
+  #tableContainer > #table > table > tbody > tr > td:not(.icon) {
     overflow-wrap: normal;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .name > span {

@@ -7,7 +7,25 @@
       <div id='links'>
         <router-link to='/' class='link'>Home</router-link>
         <span class='separator'>|</span>
-        <router-link to='/items' class='link'>Items</router-link>
+        <div class='dropdown'>
+        <router-link to='/items' class='link dropbtn'>Items</router-link>
+              <div class='dropdown-content' id='myDropdown'>
+                <div v-for='link in links'>
+                <div class='linkContainer'>
+                  <img :src=link.icon :alt=link.name width='45px'>
+                  <router-link :to=returnLink(link.linkName)>{{ link.name }}</router-link>
+                </div>
+              </div>
+                      <div class='edge left'></div>
+        <div class='edge right'></div>
+        <div class='edge top'></div>
+        <div class='edge bottom'></div>
+        <div class='corner topLeft'></div>
+        <div class='corner topRight'></div>
+        <div class='corner bottomLeft'></div>
+        <div class='corner bottomRight'></div>
+              </div>
+      </div>
         <span class='separator'>|</span>
         <router-link to='/' class='link'>Link</router-link>
         <span class='separator'>|</span>
@@ -21,8 +39,22 @@
 </template>
 
 <script>
+import links from './assets/itemMenuLinks';
+const arrows = require('./assets/images/GearSlots/ArrowsSlot.png');
+
 export default {
   name: 'app',
+  data() {
+    return {
+      links,
+      arrows,
+    };
+  },
+  methods: {
+    returnLink(name) {
+      return '/items/types/'.concat(name);
+    },
+  },
 };
 </script>
 
@@ -104,4 +136,118 @@ tr:nth-child(odd) {
   font-size: 25px;
   color: rgba(230, 201, 83, 0.3);
 }
+.linkContainer {
+  display: flex;
+  width: 10vw;
+  height: 5vh;
+  align-items: center;
+  padding-left: 10px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: flex;
+    position: absolute;
+    background-color: #313D52;
+    flex-flow: row wrap;
+    width: 30vw;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: center;
+}
+
+.linkContainer:hover {
+  background-color: #8299b8;
+  cursor: pointer;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #E6C953;
+    font-weight: bold;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+.dropdown-content > div:nth-child(even) {
+   background-color: #3E506F;
+}
+</style>
+
+<style scoped >
+  .edge {
+    position: absolute;
+  }
+
+  .corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-image: url('./assets/images/border_corners.png');
+  }
+
+  .left {
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background-image: url('./assets/images/tooltip/left.png');
+  }
+
+  .right {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background-image: url('./assets/images/tooltip/right.png');
+  }
+
+  .top {
+    top: 0;
+    left: 2px;
+    right: 2px;
+    height: 4px;
+    background-image: url('./assets/images/tooltip/top.png');
+  }
+
+  .bottom {
+    bottom: 0;
+    left: 2px;
+    right: 2px;
+    height: 8px;
+    background-image: url('./assets/images/tooltip/bot.png');
+  }
+
+  .topLeft {
+    top: 0;
+    bottom: 0;
+  }
+
+  .topRight {
+    top: 0;
+    right: 0;
+    background-position: 8px 0;
+  }
+
+  .bottomLeft {
+    bottom: 0;
+    left: 0;
+    background-position: 0 8px;
+  }
+
+  .bottomRight {
+    bottom: 0;
+    right: 0;
+    background-position: 8px 8px;
+  }
 </style>

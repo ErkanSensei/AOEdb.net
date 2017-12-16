@@ -20,7 +20,7 @@ module.exports = {
       'webpack': {
         'config': 'build/webpack.base.conf.js'
       }
-    }
+    },
   },
   // add your custom rules here
   'rules': {

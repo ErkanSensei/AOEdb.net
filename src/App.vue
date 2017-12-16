@@ -78,7 +78,7 @@ tr:nth-child(odd) {
   color: #E6C953;
   margin-right: auto;
   margin-left: auto;
-  width: 70%;
+  width: 80%;
   padding: 0px;
   display: block;
   position: relative;

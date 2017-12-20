@@ -81,6 +81,12 @@ export default {
       }
     },
   },
+  watch: {
+    $route(to) {
+      this.items = [];
+      this.fetchData(to.params.name);
+    },
+  },
 };
 </script>
 
@@ -88,7 +94,7 @@ export default {
   #tableContainer {
     position: relative;
     width: 60%;
-    height: 90%;
+    height: 80%;
     margin: auto;
     margin-top: 2%;
     overflow: hidden;
